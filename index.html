@@ -1,0 +1,378 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.pf{background:#0d0d0d;color:#e2e2e2;font-family:var(--font-sans);min-height:100vh}
+nav{background:rgba(13,13,13,0.97);border-bottom:1px solid #1f1f1f;padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.logo{font-size:15px;font-weight:700;color:#fff}.logo span{color:#c084fc}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{color:#666;font-size:12px;font-weight:500;text-decoration:none;text-transform:uppercase;letter-spacing:1px}
+.nav-links a:hover{color:#c084fc}
+.hero{padding:6rem 2rem 5rem;text-align:center;border-bottom:1px solid #1a1a1a}
+.hero-badge{display:inline-block;padding:6px 18px;border-radius:999px;background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.25);color:#c084fc;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:2rem}
+.hero h1{font-size:clamp(2.2rem,6vw,4rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:1.5rem}
+.hero h1 span{color:#c084fc}
+.hero-sub{font-size:16px;color:#666;line-height:1.7;max-width:520px;margin:0 auto 2.5rem}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-p{padding:13px 28px;background:#c084fc;color:#0d0d0d;font-weight:700;border-radius:10px;text-decoration:none;font-size:14px}
+.btn-s{padding:13px 28px;background:transparent;color:#fff;font-weight:700;border-radius:10px;text-decoration:none;font-size:14px;border:1px solid #2a2a2a}
+.section{padding:5rem 2rem}
+.section.alt{background:#0a0a0a}
+.sec-label{font-size:11px;font-weight:700;color:#c084fc;text-transform:uppercase;letter-spacing:3px;margin-bottom:0.75rem;text-align:center}
+.sec-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;color:#fff;margin-bottom:1rem;text-align:center}
+.sec-sub{color:#666;font-size:15px;line-height:1.7;max-width:540px;margin:0 auto;text-align:center}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;max-width:960px;margin:3rem auto 0}
+@media(max-width:640px){.about-grid,.contact-grid{grid-template-columns:1fr}.nav-links{display:none}}
+.about-text{color:#999;font-size:15px;line-height:1.8;margin-bottom:1.2rem}
+.phil-item{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid #1a1a1a}
+.phil-dot{width:7px;height:7px;border-radius:50%;background:#c084fc;flex-shrink:0}
+.phil-text{color:#ccc;font-size:14px}
+.tools-grid{display:grid;gap:10px}
+.tool-card{padding:1rem 1.25rem;border-radius:14px;background:#141414;border:1px solid #1f1f1f;display:flex;align-items:center;gap:14px}
+.tool-logo{width:42px;height:42px;border-radius:10px;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:transparent}
+.tool-logo img{width:100%;height:100%;object-fit:contain;mix-blend-mode:normal}
+.tool-logo.ps{background:#001e36;border-radius:10px}
+.tool-logo.ai{background:transparent}
+.tool-logo.canva{background:transparent}
+.tool-logo.cap{background:#1a1a1a;border-radius:10px;font-size:20px}
+.tool-info{flex:1}
+.tool-name{color:#fff;font-weight:700;font-size:14px;margin-bottom:4px}
+.tool-desc{color:#555;font-size:12px}
+.tool-level{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:3px 9px;border-radius:999px;flex-shrink:0}
+.adv{background:rgba(192,132,252,0.12);color:#c084fc}
+.pro{background:rgba(52,211,153,0.12);color:#34d399}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.5rem;max-width:960px;margin:3rem auto 0}
+.proj-card{border-radius:20px;background:#111;border:1px solid #1f1f1f;overflow:hidden;transition:border-color 0.2s}
+.proj-card:hover{border-color:#c084fc44}
+.proj-img{width:100%;height:220px;overflow:hidden;position:relative;background:#1a1a1a}
+.proj-img img{width:100%;height:100%;object-fit:contain;transition:transform 0.3s}
+.proj-card:hover .proj-img img{transform:scale(1.04)}
+.proj-overlay{position:absolute;inset:0;background:rgba(0,0,0,0);transition:background 0.3s;display:flex;align-items:center;justify-content:center}
+.proj-card:hover .proj-overlay{background:rgba(0,0,0,0.35)}
+.proj-badge{background:#c084fc;color:#0d0d0d;font-size:10px;font-weight:700;padding:5px 14px;border-radius:999px;opacity:0;transition:opacity 0.3s;text-transform:uppercase;letter-spacing:1px}
+.proj-card:hover .proj-badge{opacity:1}
+.proj-body{padding:1.25rem}
+.proj-cat{font-size:10px;font-weight:700;color:#c084fc;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.pdot{width:6px;height:6px;border-radius:50%;background:#c084fc;display:inline-block}
+.proj-title{color:#fff;font-weight:700;font-size:16px;margin-bottom:6px}
+.proj-desc{color:#666;font-size:12px;line-height:1.65;margin-bottom:1rem}
+.proj-tags{display:flex;flex-wrap:wrap;gap:6px}
+.ptag{padding:3px 10px;background:#1a1a1a;border:1px solid #252525;border-radius:6px;color:#555;font-size:10px;font-weight:700;text-transform:uppercase}
+.highlight{border-color:#c084fc44;background:#130f1a}
+.best-badge{display:inline-block;background:rgba(192,132,252,0.15);border:1px solid rgba(192,132,252,0.3);color:#c084fc;font-size:10px;font-weight:700;padding:3px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;max-width:960px;margin:2.5rem auto 0}
+.svc-card{padding:1.5rem;border-radius:16px;background:#111;border:1px solid #1f1f1f}
+.svc-icon{font-size:20px;margin-bottom:0.75rem}
+.svc-title{color:#fff;font-weight:700;font-size:14px;margin-bottom:5px}
+.svc-desc{color:#666;font-size:12px;line-height:1.6}
+.str-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;max-width:960px;margin:2.5rem auto 0}
+.str-card{padding:1.25rem;border-radius:14px;background:#111;border:1px solid #1f1f1f;display:flex;gap:10px}
+.str-mark{color:#c084fc;font-size:16px;flex-shrink:0}
+.str-text{color:#aaa;font-size:13px;line-height:1.6}
+.contact-wrap{max-width:960px;margin:0 auto;border-radius:28px;background:#111;border:1px solid #1f1f1f;padding:3rem 2rem}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.contact-grid h2{color:#fff;font-size:24px;font-weight:700;margin-bottom:0.75rem}
+.contact-grid p{color:#666;font-size:14px;line-height:1.7;margin-bottom:1.5rem}
+.soc-row{display:flex;gap:10px}
+.soc-a{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;text-decoration:none;border:1px solid #2a2a2a;color:#fff;transition:transform 0.15s}
+.soc-a:hover{transform:scale(1.08)}
+.soc-email{background:#c084fc;color:#0d0d0d;border-color:#c084fc}
+.email-info{margin-top:1.25rem;padding:1rem;border-radius:12px;background:#0d0d0d;border:1px solid #1f1f1f}
+.email-lbl{font-size:10px;color:#444;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.email-val{font-size:13px;color:#c084fc}
+.msg-form{background:#0d0d0d;border:1px solid #1f1f1f;border-radius:18px;padding:1.5rem}
+.msg-form label{font-size:10px;font-weight:700;color:#c084fc;text-transform:uppercase;letter-spacing:2px;display:block;margin-bottom:8px}
+textarea{width:100%;background:#111;border:1px solid #1f1f1f;border-radius:12px;padding:12px;color:#e2e2e2;font-size:13px;resize:none;outline:none;font-family:inherit}
+.sbtn{width:100%;padding:13px;background:#c084fc;color:#0d0d0d;font-weight:700;border-radius:12px;border:none;cursor:pointer;font-size:14px;margin-top:10px}
+footer{padding:2.5rem 2rem;text-align:center;border-top:1px solid #1a1a1a}
+.foot-logo{color:#c084fc;font-weight:700;font-size:14px;margin-bottom:6px}
+.foot-copy{color:#2a2a2a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin-bottom:1rem}
+.foot-links{display:flex;justify-content:center;gap:1.5rem}
+.foot-links a{color:#333;font-size:12px;text-decoration:none}
+.foot-links a:hover{color:#c084fc}
+.profile-wrap {
+  width: 400px;        /* bigger size */
+  height: 400px;
+  margin: 0 auto 1.5rem;
+  position: relative;
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;    /* no shape, rectangle */
+  display: block;
+  position: relative;
+}
+
+/* Gradient overlay from bottom */
+.profile-wrap::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(13,13,13,0.6), rgba(13,13,13,0));
+  pointer-events: none;
+}
+.profile-socials{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin-bottom:1.8rem;
+}
+
+.profile-socials a{
+  width:40px;
+  height:40px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid #2a2a2a;
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+  transition:0.2s;
+}
+
+.profile-socials a:hover{
+  background:#c084fc;
+  color:#0d0d0d;
+  transform:scale(1.08);
+}
+
+.contact-actions{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-top:1.5rem;
+}
+
+.contact-btn{
+  padding:14px;
+  border-radius:12px;
+  text-align:center;
+  text-decoration:none;
+  font-weight:700;
+  font-size:14px;
+  border:1px solid #2a2a2a;
+  color:#fff;
+  transition:0.2s;
+}
+
+.contact-btn:hover{
+  background:#c084fc;
+  color:#0d0d0d;
+  transform:scale(1.03);
+}
+
+.whatsapp{
+  background:#25D366;
+  color:#0d0d0d;
+  border:none;
+}
+
+</style>
+
+<div class="pf">
+  <nav>
+    <div class="logo">ANAAB <span>ARSALAN</span></div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+
+  <!-- Profile Image -->
+  <div class="profile-wrap">
+    <img src="images/profile.png" alt="Anaab Arsalan" class="profile-img">
+  </div>
+
+  <!-- Social Links -->
+  <div class="profile-socials">
+    <a href="https://facebook.com/yourusername" target="_blank">f</a>
+    <a href="https://instagram.com/4tharsalan" target="_blank">◎</a>
+    <a href="https://linkedin.com/in/anaab-arsalan" target="_blank">in</a>
+  </div>
+
+  <div class="hero-badge">Graphic Designer · Sri Lanka</div>
+  <h1>Designs that <span>communicate.</span><br>Visuals that inspire.</h1>
+  <p class="hero-sub">Creating clean, modern, and purposeful visuals using Canva, Adobe Photoshop & Illustrator — for brands, education, and social impact.</p>
+
+  <div class="hero-btns">
+    <a href="#work" class="btn-p">View My Work</a>
+    <a href="#contact" class="btn-s">Hire Me</a>
+  </div>
+</div>
+
+  <div class="section alt" id="about">
+    <div class="sec-label">About Me</div>
+    <div class="sec-title">Designer with purpose</div>
+    <div class="sec-sub">I am Anaab Arsalan, a creative graphic designer from Sri Lanka passionate about visual storytelling — especially in brand, commercial, and educational contexts.</div>
+    <div class="about-grid">
+      <div>
+        <p class="about-text">I specialize in creating clean, modern, and meaningful visuals. With experience in Canva, Adobe Photoshop, and Adobe Illustrator, I design content that connects with audiences and communicates with clarity and emotion.</p>
+        <p class="about-text">Whether it's a full brand identity, a commercial ad, or a business card — every project I take on is driven by purpose and audience connection.</p>
+        <div style="margin-top:1.5rem">
+          <div style="color:#fff;font-weight:700;font-size:14px;margin-bottom:12px">My design philosophy</div>
+          <div class="phil-item"><div class="phil-dot"></div><div class="phil-text">Clarity — every element earns its place</div></div>
+          <div class="phil-item"><div class="phil-dot"></div><div class="phil-text">Creativity — original ideas, not templates</div></div>
+          <div class="phil-item"><div class="phil-dot"></div><div class="phil-text">Purpose — design that drives real results</div></div>
+          <div class="phil-item"><div class="phil-dot"></div><div class="phil-text">Audience connection — design for people</div></div>
+        </div>
+      </div>
+      <div>
+        <div style="color:#fff;font-weight:700;font-size:14px;margin-bottom:14px">Tools I use</div>
+        <div class="tools-grid">
+          <div class="tool-card">
+            <div class="tool-logo ps"><img src="images/pslogo.png" alt="Photoshop"></div>
+            <div class="tool-info">
+              <div class="tool-name">Adobe Photoshop</div>
+              <div class="tool-desc">Image editing, poster design, photo manipulation</div>
+            </div>
+            <span class="tool-level pro">Professional</span>
+          </div>
+          <div class="tool-card">
+            <div class="tool-logo ai" style="background:transparent"><img src="images/ailogo.png" alt="Illustrator" style="border-radius:10px"></div>
+            <div class="tool-info">
+              <div class="tool-name">Adobe Illustrator</div>
+              <div class="tool-desc">Logo design, vector graphics, branding</div>
+            </div>
+            <span class="tool-level pro">Professional</span>
+          </div>
+          <div class="tool-card">
+            <div class="tool-logo canva"><img src="images/canva.png" alt="Canva"></div>
+            <div class="tool-info">
+              <div class="tool-name">Canva</div>
+              <div class="tool-desc">Social media, posters, presentations</div>
+            </div>
+            <span class="tool-level adv">Advanced</span>
+          </div>
+          <div class="tool-card">
+            <div class="tool-logo cap"><img src="images/capcut.png" alt="Capcut"></div>
+            <div class="tool-info">
+              <div class="tool-name">CapCut</div>
+              <div class="tool-desc">Motion visuals, video editing & storytelling</div>
+            </div>
+            <span class="tool-level adv">Advanced</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="work">
+    <div class="sec-label">Portfolio</div>
+    <div class="sec-title">Featured work</div>
+    <div class="sec-sub">Five real projects spanning brand identity, commercial ads, and social media design.</div>
+    <div class="proj-grid" id="proj-grid"></div>
+  </div>
+
+  <div class="section alt" id="services">
+    <div class="sec-label">Services</div>
+    <div class="sec-title">What I can do for you</div>
+    <div class="services-grid">
+      <div class="svc-card"><div class="svc-icon">📱</div><div class="svc-title">Social media design</div><div class="svc-desc">Instagram posts, TikTok graphics and platform-specific content</div></div>
+      <div class="svc-card"><div class="svc-icon">🖼️</div><div class="svc-title">Posters & flyers</div><div class="svc-desc">Event, promotional, educational and awareness campaign materials</div></div>
+      <div class="svc-card"><div class="svc-icon">🔷</div><div class="svc-title">Logo & branding</div><div class="svc-desc">Vector logos, brand identity and starter kits using Illustrator</div></div>
+      <div class="svc-card"><div class="svc-icon">📸</div><div class="svc-title">Photo editing</div><div class="svc-desc">Retouching, manipulation and compositing in Photoshop</div></div>
+      <div class="svc-card"><div class="svc-icon">💼</div><div class="svc-title">Business card design</div><div class="svc-desc">Minimal, professional card designs that make a lasting impression</div></div>
+      <div class="svc-card"><div class="svc-icon">🛍️</div><div class="svc-title">Commercial ads</div><div class="svc-desc">Product ads for food, fashion & lifestyle brands</div></div>
+    </div>
+
+    <div style="margin-top:4rem">
+      <div class="sec-label">Strengths</div>
+      <div class="sec-title" style="margin-bottom:0">Why work with me</div>
+    </div>
+    <div class="str-grid">
+      <div class="str-card"><div class="str-mark">◆</div><div class="str-text">Strong layout and composition with a clean, modern aesthetic</div></div>
+      <div class="str-card"><div class="str-mark">◆</div><div class="str-text">Skilled in both raster (Photoshop) and vector (Illustrator) design</div></div>
+      <div class="str-card"><div class="str-mark">◆</div><div class="str-text">Full brand identity work — logo, palette, typography & mockups</div></div>
+      <div class="str-card"><div class="str-mark">◆</div><div class="str-text">Commercial ad design for food, fashion and beverage brands</div></div>
+      <div class="str-card"><div class="str-mark">◆</div><div class="str-text">Creative thinking with purpose — every design has a clear message</div></div>
+      <div class="str-card"><div class="str-mark">◆</div><div class="str-text">Reliable, open to feedback, and focused on client satisfaction</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="contact">
+    <div class="contact-wrap">
+      <div class="contact-grid">
+        <div>
+          <div class="sec-label" style="text-align:left">Contact</div>
+          <h2>Let's create something great.</h2>
+          <p>Available for freelance projects, part-time roles, and full-time opportunities in Sri Lanka and internationally.</p>
+          <div class="soc-row">
+            <a href="mailto:4tharsalan2005@gmail.com" class="soc-a soc-email" title="Email">✉</a>
+            <a href="https://linkedin.com/in/anaab-arsalan" target="_blank" class="soc-a" title="LinkedIn" style="font-size:12px">in</a>
+            <a href="https://instagram.com/4tharsalan" target="_blank" class="soc-a" title="Instagram">◎</a>
+          </div>
+          <div class="email-info"><div class="email-lbl">Email</div><div class="email-val">4tharsalan2005@gmail.com</div></div>
+        </div>
+        <div class="contact-actions">
+               <a href="https://wa.me/94773050115" target="_blank" class="contact-btn whatsapp">WhatsApp Me</a>
+              <a href="https://instagram.com/4tharsalan" target="_blank" class="contact-btn">Instagram</a>
+              <a href="https://linkedin.com/in/anaab-arsalan" target="_blank" class="contact-btn">LinkedIn</a>
+              <a href="https://facebook.com/ArsalanAb" target="_blank" class="contact-btn">Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="foot-logo">ANAAB ARSALAN — Graphic Designer</div>
+    <div class="foot-copy">© 2026 · Sri Lanka · Open to worldwide clients</div>
+    <div class="foot-links">
+      <a href="mailto:4tharsalan2005@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/anaab-arsalan" target="_blank">LinkedIn</a>
+      <a href="https://instagram.com/4tharsalan" target="_blank">Instagram</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+const imgs = [
+  'images/3.png',  // SkillNest — Brand Identity
+  'images/1.png',  // Pizza Ad — Social Media
+  'images/2.png',  // Blend It — Product Ad
+  'images/5.png',  // Elevate — Fashion Ad
+  'images/4.png'   // Business Card Design
+];
+const projects=[
+  {title:"SkillNest — Brand Identity",category:"Branding & Identity",desc:"Complete brand identity for SkillNest, an educational platform. Includes logo design, light/dark variants, full color palette, and typography system.",tags:["Logo Design","Brand Identity","Illustrator","Typography"],best:true},
+  {title:"Pizza Ad — Social Media",category:"Commercial Design",desc:"Eye-catching commercial ad for a pizza brand. Warm retro tones, strong headline hierarchy, and feature callout badges designed for Instagram.",tags:["Social Media","Food & Beverage","Canva","Ad Design"]},
+  {title:"Blend It — Product Ad",category:"Commercial Design",desc:"Bold product advertisement for Blend It beverage brand. Multi-flavor showcase with strong typographic personality and product mockup integration.",tags:["Product Ad","FMCG","Typography","Canva"]},
+  {title:"Elevate — Fashion Ad",category:"Fashion & Lifestyle",desc:"Cinematic fashion advertisement for Elevate clothing. Atmospheric floating product shot with editorial typography and a premium, minimal feel.",tags:["Fashion","Product Photography","Photoshop","Ad Design"]},
+  {title:"Business Card Design",category:"Print Design",desc:"Clean, minimal two-sided business card template. Neutral tones, clear hierarchy, and elegant layout — professional and timeless.",tags:["Business Card","Print Design","Canva","Branding"]}
+];
+
+const grid=document.getElementById('proj-grid');
+projects.forEach((p,i)=>{
+  const card=document.createElement('div');
+  card.className='proj-card'+(p.best?' highlight':'');
+  card.innerHTML=`
+    <div class="proj-img">
+      <img src="${imgs[i]}" alt="${p.title}" loading="lazy">
+      <div class="proj-overlay"><span class="proj-badge">View Project</span></div>
+    </div>
+    <div class="proj-body">
+      ${p.best?'<div class="best-badge">⭐ Best Work</div>':''}
+      <div class="proj-cat"><span class="pdot"></span>${p.category}</div>
+      <div class="proj-title">${p.title}</div>
+      <div class="proj-desc">${p.desc}</div>
+      <div class="proj-tags">${p.tags.map(t=>`<span class="ptag">${t}</span>`).join('')}</div>
+    </div>`;
+  grid.appendChild(card);
+});
+
+function sendMsg(){
+  const msg=document.getElementById('msg').value.trim();
+  if(!msg)return;
+  window.location.href=`mailto:4tharsalan2005@gmail.com?subject=${encodeURIComponent('Design Project Inquiry')}&body=${encodeURIComponent(msg)}`;
+}
+</script>
